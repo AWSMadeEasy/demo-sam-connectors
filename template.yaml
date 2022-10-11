@@ -24,8 +24,30 @@ Resources:
           AllowOrigins:
             - "*"
 
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: awsmadeeasy-demo-sam-connector-bucket
+
+  MyConnector:
+    Type: AWS::Serverless::Connector
+    Properties:
+      Source:
+        Id: PyFunction
+      Destination:
+        Id: MyS3Bucket
+      Permissions:
+        - Write
+        - Read
+
+
 Outputs:
   PyEndpoint:
     Description: "PyFunction Endpoint"
     Value:
       Fn::GetAtt: PyFunctionUrl.FunctionUrl
+  MyBucketArn:
+    Description: "ARN of demo S3 Bucket"
+    Value:
+      Fn::GetAtt: MyS3Bucket.Arn
+
