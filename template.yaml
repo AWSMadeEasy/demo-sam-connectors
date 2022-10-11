@@ -1,0 +1,31 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Sample Python Serverless Function
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  PyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - arm64
+      AutoPublishAlias: live
+      FunctionUrlConfig:
+        AuthType: NONE
+        Cors:
+          AllowOrigins:
+            - "*"
+
+Outputs:
+  PyEndpoint:
+    Description: "PyFunction Endpoint"
+    Value:
+      Fn::GetAtt: PyFunctionUrl.FunctionUrl

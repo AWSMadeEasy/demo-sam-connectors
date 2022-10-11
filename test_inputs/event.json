@@ -1,0 +1,5 @@
+{
+  "docstring": "This is the lambda event passed in during local testing",
+  "statement_to_return": "Hello World!!!",
+  "more_stuff" : 3
+}
